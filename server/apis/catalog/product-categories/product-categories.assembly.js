@@ -93,8 +93,8 @@ var api = {
         return function (req, res, next) {
 
             var params = {
-                acceptable: ['name'],
-                essential: ['name'],
+                acceptable: ['categoryName'],
+                essential: ['categoryName'],
                 resettable: [],
                 explains: {
                     "name": "제품 카테고리 이름"
@@ -129,11 +129,11 @@ var api = {
         return function (req, res, next) {
 
             var params = {
-                acceptable: ['name'],
+                acceptable: ['categoryName'],
                 essential: [],
                 resettable: [],
                 explains: {
-                    "name": "제품 카테고리 이름",
+                    "categoryName": "제품 카테고리 이름",
                     "id": "데이터 리소스의 id"
                 },
                 title: '수정',

@@ -7,8 +7,8 @@ put.validate = function () {
         var PRODUCT = req.meta.std.product;
 
         req.check('id', '400_12').isInt();
-        if (req.body.name !== undefined) {
-            req.check('name', '400_8').len(PRODUCT.minNameLength, PRODUCT.maxNameLength);
+        if (req.body.categoryName !== undefined) {
+            req.check('categoryName', '400_8').len(PRODUCT.minNameLength, PRODUCT.maxNameLength);
         }
 
         req.utils.common.checkError(req, res, next);
@@ -20,8 +20,8 @@ put.update = function () {
     return function (req, res, next) {
         var update = {};
 
-        if (req.body.name !== undefined) {
-            update.name = req.body.name
+        if (req.body.categoryName !== undefined) {
+            update.categoryName = req.body.categoryName
         }
 
         req.models.AppProductCategory.updateDataById(req.params.id, update, function (status, data) {

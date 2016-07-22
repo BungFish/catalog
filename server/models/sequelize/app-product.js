@@ -119,7 +119,7 @@ module.exports = {
                 var where = {};
 
                 if (options.productName !== undefined) {
-                    where['name'] = {
+                    where['productName'] = {
                         '$like': "%" + options.productName + "%"
                     }
                 }

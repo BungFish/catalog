@@ -97,11 +97,11 @@ var api = {
         return function (req, res, next) {
 
             var params = {
-                acceptable: ['name', 'description', 'manufacturer', 'price', 'productCategoryId', 'imageIds'],
-                essential: ['name', 'manufacturer', 'price', 'productCategoryId', 'imageIds'],
+                acceptable: ['productName', 'description', 'manufacturer', 'price', 'productCategoryId', 'imageIds'],
+                essential: ['productName', 'manufacturer', 'price', 'productCategoryId', 'imageIds'],
                 resettable: [],
                 explains: {
-                    "name": "제품명",
+                    "productName": "제품명",
                     "description": "제품설명, 스펙",
                     "manufacturer": "제조사",
                     "price": "제품가격",
@@ -138,11 +138,11 @@ var api = {
         return function (req, res, next) {
 
             var params = {
-                acceptable: ['name', 'description', 'manufacturer', 'price', 'productCategoryId'],
+                acceptable: ['productName', 'description', 'manufacturer', 'price', 'productCategoryId'],
                 essential: [],
                 resettable: [],
                 explains: {
-                    "name": "제품명",
+                    "productName": "제품명",
                     "description": "제품설명, 스펙",
                     "manufacturer": "제조사",
                     "price": "제품가격",

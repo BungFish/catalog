@@ -6,7 +6,7 @@ post.validate = function () {
     return function (req, res, next) {
         var PRODUCT = req.meta.std.product;
 
-        req.check('name', '400_8').len(PRODUCT.minNameLength, PRODUCT.maxNameLength);
+        req.check('productName', '400_8').len(PRODUCT.minNameLength, PRODUCT.maxNameLength);
 
         if (req.body.description !== undefined) {
             req.check('description', '400_8').len(PRODUCT.minNameLength, PRODUCT.maxNameLength);
@@ -44,7 +44,7 @@ post.existsImages = function () {
 post.setParam = function () {
     return function (req, res, next) {
         var body = {
-            name: req.body.name,
+            productName: req.body.productName,
             manufacturer: req.body.manufacturer,
             price: req.body.price,
             productCategoryId: req.body.productCategoryId,

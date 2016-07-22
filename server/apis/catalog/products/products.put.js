@@ -7,8 +7,8 @@ put.validate = function () {
         var PRODUCT = req.meta.std.product;
 
         req.check('id', '400_12').isInt();
-        if (req.body.name !== undefined) {
-            req.check('name', '400_8').len(PRODUCT.minNameLength, PRODUCT.maxNameLength);
+        if (req.body.productName !== undefined) {
+            req.check('productName', '400_8').len(PRODUCT.minNameLength, PRODUCT.maxNameLength);
         }
 
         if (req.body.description !== undefined) {
@@ -37,8 +37,8 @@ put.update = function () {
     return function (req, res, next) {
         var update = {};
 
-        if (req.body.name !== undefined) {
-            update.name = req.body.name
+        if (req.body.productName !== undefined) {
+            update.productName = req.body.productName
         }
         if (req.body.description !== undefined) {
             update.description = req.body.description
