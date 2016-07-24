@@ -9,6 +9,9 @@ var standards = {
         "isUseS3Bucket": false,
         "isUseRedis": false
     },
+    "file": {
+        "enumFolders": ["user", "common", "bg", "article", "attach", "catalog"]
+    },
     "product": {
         "minNameLength": 1,
         "maxNameLength": 10000,
