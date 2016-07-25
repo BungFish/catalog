@@ -35,7 +35,7 @@ var api = {
 
             if (!isOnlyParams) {
                 var apiCreator = new HAPICreator(req, res, next);
-                
+
                 apiCreator.add(req.middles.validator(
                     params.acceptable,
                     params.essential,
@@ -57,7 +57,7 @@ var api = {
         return function (req, res, next) {
 
             var params = {
-                acceptable: ['last', 'size', 'productName', 'productCategory', 'manufacturer'],
+                acceptable: ['last', 'size', 'orderBy', 'sort', 'productName', 'productCategoryId', 'manufacturer'],
                 essential: [],
                 resettable: [],
                 explains: {
@@ -66,7 +66,7 @@ var api = {
                     "orderBy": "정렬 유형 " + STD.product.orderBy.join(", "),
                     "sort": "오름차순 내림차순 " + STD.common.enumSortTypes.join(", "),
                     "productName": "제품명",
-                    "productCategory": "제품 카테고리",
+                    "productCategoryId": "제품 카테고리 id",
                     "manufacturer": "제조사"
                 },
                 title: '제품 목록 조회',
@@ -75,7 +75,7 @@ var api = {
 
             if (!isOnlyParams) {
                 var apiCreator = new HAPICreator(req, res, next);
-                
+
                 apiCreator.add(req.middles.validator(
                     params.acceptable,
                     params.essential,
@@ -105,7 +105,8 @@ var api = {
                     "description": "제품설명, 스펙",
                     "manufacturer": "제조사",
                     "price": "제품가격",
-                    "productCategoryId": "제품 카테고리 id"
+                    "productCategoryId": "제품 카테고리 id",
+                    "imageIds": "이미지 id, 컴마로 구분"
                 },
                 defaults: {},
                 title: '제품 등록하기',
@@ -138,7 +139,7 @@ var api = {
         return function (req, res, next) {
 
             var params = {
-                acceptable: ['productName', 'description', 'manufacturer', 'price', 'productCategoryId'],
+                acceptable: ['productName', 'description', 'manufacturer', 'price', 'productCategoryId', 'imageIds'],
                 essential: [],
                 resettable: [],
                 explains: {
@@ -147,7 +148,8 @@ var api = {
                     "manufacturer": "제조사",
                     "price": "제품가격",
                     "productCategoryId": "제품 카테고리 id",
-                    "id": "데이터 리소스의 id"
+                    "id": "데이터 리소스의 id",
+                    "imageIds": "이미지 id, 컴마로 구분"
                 },
                 title: '수정',
                 param: 'id',

@@ -57,13 +57,14 @@ var api = {
         return function (req, res, next) {
 
             var params = {
-                acceptable: ['last', 'size', 'userId'],
+                acceptable: ['last', 'size', 'orderBy', 'sort'],
                 essential: [],
                 resettable: [],
                 explains: {
-                    'userId': '유저별 필터링',
                     'last': '마지막 데이터',
-                    'size': '몇개 로드할지에 대한 사이즈'
+                    'size': '몇개 로드할지에 대한 사이즈',
+                    'orderBy': "정렬 유형 " + STD.productCategory.orderBy.join(", "),
+                    "sort": "오름차순 내림차순 " + STD.common.enumSortTypes.join(", ")
                 },
                 title: '',
                 state: 'development'

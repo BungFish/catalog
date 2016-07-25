@@ -110,6 +110,73 @@ module.exports = {
                     }
                 });
             },
+            'updateProduct': function (id, body, callback) {
+                var createdProduct = null;
+                var createdImages = null;
+
+                if (body.imageIds !== undefined) {
+                    var imageIds = body.imageIds;
+                    delete body.imageIds;
+                }
+
+                sequelize.transaction(function (t) {
+                    return sequelize.models.AppProduct.update(
+                        body,
+                        {
+                            where: {
+                                id: id
+                            },
+                            transaction: t
+                        }
+                    ).then(function (product) {
+                        console.log('product', product);
+                        createdProduct = product;
+
+                        if (imageIds !== undefined) {
+                            return sequelize.models.AppProductImage.destroy({
+                                where: {
+                                    productId: id
+                                }
+                            }, {
+                                transaction: t
+                            }).then(function (deleted) {
+                                console.log('deleted', deleted);
+
+                                var productImages = [];
+                                for (var i = 0; i < imageIds.length; i++) {
+                                    var temp = {
+                                        productId: id,
+                                        imageId: imageIds[i]
+                                    };
+                                    productImages.push(temp);
+                                }
+
+                                return sequelize.models.AppProductImage.bulkCreate(productImages, {
+                                    individualHooks: true,
+                                    transaction: t
+                                }).then(function (images) {
+                                    console.log('images', images);
+                                    createdImages = images;
+                                    return true;
+                                });
+
+                            })
+                        } else {
+                            return true;
+                        }
+                    });
+
+                }).catch(errorHandler.catchCallback(callback)).done(function (done) {
+
+                    if (done) {
+                        createdProduct.images = createdImages;
+                        callback(200, createdProduct);
+                    } else {
+                        callback(500);
+                    }
+                });
+
+            },
             'findProductsByOptions': function (options, callback) {
                 sequelize.models.AppProduct.hasMany(sequelize.models.AppProductImage, {
                     foreignKey: 'productId',
@@ -124,8 +191,8 @@ module.exports = {
                     }
                 }
 
-                if (options.productCategory !== undefined) {
-                    where.productCategory = options.productCategory;
+                if (options.productCategoryId !== undefined) {
+                    where.productCategoryId = options.productCategoryId;
                 }
 
                 if (options.manufacturer !== undefined) {
@@ -141,7 +208,7 @@ module.exports = {
                 var query = {
                     'limit': parseInt(options.size),
                     'where': where,
-                    'order': [[options.orderBy, 'DESC']],
+                    'order': [[options.orderBy, options.sort]],
                     'include': [{
                         'model': sequelize.models.AppProductCategory,
                         'as': 'productCategory'

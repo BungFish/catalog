@@ -26,6 +26,7 @@ put.validate = function () {
         }
         if (req.body.imageIds !== undefined) {
             req.check('imageIds', '400_12').isNumberIds(PRODUCT.maxImageCount);
+            req.body.imageIds = req.body.imageIds.split(",");
         }
 
         req.utils.common.checkError(req, res, next);
@@ -56,7 +57,7 @@ put.update = function () {
             update.imageIds = req.body.imageIds
         }
 
-        req.models.AppProduct.updateDataById(req.params.id, update, function (status, data) {
+        req.models.AppProduct.updateProduct(req.params.id, update, function (status, data) {
             if (status == 200) {
                 req.data = data;
                 next();

@@ -23,7 +23,9 @@ var standards = {
     },
     "productCategory": {
         "minNameLength": 1,
-        "maxNameLength": 1000
+        "maxNameLength": 1000,
+        "orderBy": ["createdAt"],
+        "defaultOrderBy": "createdAt"
     }
 };
 

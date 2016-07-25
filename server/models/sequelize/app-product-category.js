@@ -48,7 +48,31 @@ module.exports = {
         },
         'instanceMethods': Sequelize.Utils._.extend(mixin.options.instanceMethods, {}),
         'classMethods': Sequelize.Utils._.extend(mixin.options.classMethods, {
+            'findProductCategoriesByOption': function (options, callback) {
 
+                var where = {};
+
+                if (options.orderBy !== undefined && options.last !== undefined) {
+                    where[options.orderBy] = {
+                        '$lt': options.last
+                    };
+                }
+
+                var query = {
+                    'limit': parseInt(options.size),
+                    'where': where,
+                    'order': [[options.orderBy, options.sort]]
+                };
+                
+                sequelize.models.AppProductCategory.findAllDataForQuery(query, function (status, data) {
+
+                    var result = {
+                        list: data
+                    };
+
+                    callback(status, result);
+                });
+            }
         })
     }
 };
