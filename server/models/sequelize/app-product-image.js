@@ -23,6 +23,7 @@ module.exports = {
             reference: 'AppProduct',
             referenceKey: 'id',
             'as': 'product',
+            'asReverse': 'productImages',
             allowNull: false
         },
         'imageId': {

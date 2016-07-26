@@ -178,10 +178,6 @@ module.exports = {
 
             },
             'findProductsByOptions': function (options, callback) {
-                sequelize.models.AppProduct.hasMany(sequelize.models.AppProductImage, {
-                    foreignKey: 'productId',
-                    as: 'productImages'
-                });
 
                 var where = {};
 
